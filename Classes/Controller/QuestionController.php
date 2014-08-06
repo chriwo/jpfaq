@@ -31,8 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class Tx_Jpfaq_Controller_QuestionController extends Tx_Extbase_MVC_Controller_ActionController
-{
+class Tx_Jpfaq_Controller_QuestionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
     /**
      * questionRepository
@@ -41,16 +40,19 @@ class Tx_Jpfaq_Controller_QuestionController extends Tx_Extbase_MVC_Controller_A
      */
     protected $questionRepository;
 
+	/**
+	 * @var Tx_Jpfaq_Domain_Repository_CategoryRepository
+	 */
+	protected $categoryRepository;
+
     /**
      * Initializes the current action
      *
      * @return void
      */
-    protected function initializeAction()
-    {
-        $this->questionRepository = t3lib_div::makeInstance('Tx_Jpfaq_Domain_Repository_QuestionRepository');
-        $this->categoryRepository = t3lib_div::makeInstance('Tx_Jpfaq_Domain_Repository_CategoryRepository');
-
+    protected function initializeAction() {
+		$this->questionRepository = $this->objectManager->get('Tx_Jpfaq_Domain_Repository_QuestionRepository');
+		$this->categoryRepository = $this->objectManager->get('Tx_Jpfaq_Domain_Repository_CategoryRepository');
 
         // stylesheets includes in header
         $includes = '';
@@ -58,7 +60,7 @@ class Tx_Jpfaq_Controller_QuestionController extends Tx_Extbase_MVC_Controller_A
             $path = "";
             $mediatype = "all";
             if (isset($cssFile["path"])) {
-                $path .= str_replace("EXT:", t3lib_extMgm::siteRelPath($this->request->getControllerExtensionKey()), $cssFile["path"]);
+                $path .= str_replace("EXT:", \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->request->getControllerExtensionKey()), $cssFile["path"]);
                 if (isset($cssFile["mediatype"])) {
                     $mediatype = $cssFile["mediatype"];
                 }
@@ -70,8 +72,8 @@ class Tx_Jpfaq_Controller_QuestionController extends Tx_Extbase_MVC_Controller_A
 
         // load jQuery lib
         // First check if extension t3jQuery is loaded
-        if (t3lib_extMgm::isLoaded('t3jquery')) {
-            require_once(t3lib_extMgm::extPath('t3jquery') . 'class.tx_t3jquery.php');
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('t3jquery')) {
+            require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('t3jquery') . 'class.tx_t3jquery.php');
         }
         // If t3jQuery is loaded and the custom Library has been created
         if (T3JQUERY === true) {
@@ -80,7 +82,7 @@ class Tx_Jpfaq_Controller_QuestionController extends Tx_Extbase_MVC_Controller_A
             $includeJquery = $this->settings["includeJquery"];
             $pathIncludeJquery = "";
             if (isset($includeJquery["path"])) {
-                $pathIncludeJquery .= str_replace("EXT:", t3lib_extMgm::siteRelPath($this->request->getControllerExtensionKey()), $includeJquery["path"]);
+                $pathIncludeJquery .= str_replace("EXT:", \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->request->getControllerExtensionKey()), $includeJquery["path"]);
             }
             else  { $pathIncludeJquery = NULL; }
         }
@@ -90,7 +92,7 @@ class Tx_Jpfaq_Controller_QuestionController extends Tx_Extbase_MVC_Controller_A
         $includeQuicksearch = $this->settings["includeQuicksearch"];
         $pathIncludeQuicksearch = "";
         if (isset($includeQuicksearch["path"])) {
-            $pathIncludeQuicksearch .= str_replace("EXT:", t3lib_extMgm::siteRelPath($this->request->getControllerExtensionKey()), $includeQuicksearch["path"]);
+            $pathIncludeQuicksearch .= str_replace("EXT:", \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::siteRelPath($this->request->getControllerExtensionKey()), $includeQuicksearch["path"]);
         }
 
 
@@ -111,15 +113,14 @@ class Tx_Jpfaq_Controller_QuestionController extends Tx_Extbase_MVC_Controller_A
      *
      * @return string The rendered list view
      */
-    public function listAction()
-    {
-
+    public function listAction() {
         // get selected category from Flexform
         $selectedCategory = intval($this->settings['flexform']['selectCategory']);
         // get all questions belonging to this category
         $flexformPid = intval($this->settings['flexform']['selectPid']);
         $questions = $this->questionRepository->getAllQuestionsForCategory($selectedCategory, $flexformPid);
-        $this->view->assign('showSearchForm', $this->settings['flexform']['showSearch']);
+
+		$this->view->assign('showSearchForm', $this->settings['flexform']['showSearch']);
         $this->view->assign('questions', $questions);
         $this->view->assign('category', $this->categoryRepository->getCategoryNameForCategoryUid($selectedCategory));
         $this->view->assign('categoryUid', $selectedCategory);
@@ -196,7 +197,7 @@ HEREDOC;
     public function createAction(Tx_Jpfaq_Domain_Model_Question $newQuestion)
     {
         $this->questionRepository->add($newQuestion);
-        $this->flashMessageContainer->add('Your new Question was created.');
+		$this->addFlashMessage('Your new Question was created.');
         $this->redirect('list');
     }
 
@@ -221,7 +222,7 @@ HEREDOC;
     public function updateAction(Tx_Jpfaq_Domain_Model_Question $question)
     {
         $this->questionRepository->update($question);
-        $this->flashMessageContainer->add('Your Question was updated.');
+        $this->addFlashMessage('Your Question was updated.');
         $this->redirect('list');
     }
 
@@ -235,7 +236,7 @@ HEREDOC;
     public function deleteAction(Tx_Jpfaq_Domain_Model_Question $question)
     {
         $this->questionRepository->remove($question);
-        $this->flashMessageContainer->add('Your Question was removed.');
+        $this->addFlashMessage('Your Question was removed.');
         $this->redirect('list');
     }
 }

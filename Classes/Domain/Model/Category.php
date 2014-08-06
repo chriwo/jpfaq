@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class Tx_Jpfaq_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Jpfaq_Domain_Model_Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * category
@@ -61,4 +61,5 @@ class Tx_Jpfaq_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 }
+
 ?>

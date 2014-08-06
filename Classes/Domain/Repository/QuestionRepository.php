@@ -31,16 +31,21 @@
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Tx_Jpfaq_Domain_Repository_QuestionRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Jpfaq_Domain_Repository_QuestionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-    protected $defaultOrderings = array(
-        'sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+	/**
+	 * @var array
+	 */
+	protected $defaultOrderings = array(
+        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     );
 
     /**
      *  Get all questions for a categoryUID
      * 
      * @param integer $categoryUID
+	 * @param integer $flexformPid
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
      */
     public function getAllQuestionsForCategory($categoryUID, $flexformPid) {
         $query = $this->createQuery();

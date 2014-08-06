@@ -31,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class Tx_Jpfaq_Controller_CategoryController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Jpfaq_Controller_CategoryController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 	
 	/**
 	 * categoryRepository
@@ -46,7 +46,7 @@ class Tx_Jpfaq_Controller_CategoryController extends Tx_Extbase_MVC_Controller_A
 	 * @return void
 	 */
 	protected function initializeAction() {
-		$this->categoryRepository = t3lib_div::makeInstance('Tx_Jpfaq_Domain_Repository_CategoryRepository');
+		$this->categoryRepository = $this->objectManager->get('Tx_Jpfaq_Domain_Repository_CategoryRepository');
 	}
 		
 	/**

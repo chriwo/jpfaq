@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class Tx_Jpfaq_Domain_Model_Question extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Jpfaq_Domain_Model_Question extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * question
@@ -53,7 +53,7 @@ class Tx_Jpfaq_Domain_Model_Question extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * category
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Jpfaq_Domain_Model_Category> $category
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Jpfaq_Domain_Model_Category> $category
 	 */
 	protected $category;
 
@@ -68,7 +68,7 @@ class Tx_Jpfaq_Domain_Model_Question extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage instances.
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage instances.
 	 *
 	 * @return void
 	 */
@@ -78,7 +78,7 @@ class Tx_Jpfaq_Domain_Model_Question extends Tx_Extbase_DomainObject_AbstractEnt
 		* It will be rewritten on each save in the kickstarter
 		* You may modify the constructor of this class instead
 		*/
-		$this->category = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -122,17 +122,17 @@ class Tx_Jpfaq_Domain_Model_Question extends Tx_Extbase_DomainObject_AbstractEnt
 	/**
 	 * Setter for category
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Jpfaq_Domain_Model_Category> $category category
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Jpfaq_Domain_Model_Category> $category category
 	 * @return void
 	 */
-	public function setCategory(Tx_Extbase_Persistence_ObjectStorage $category) {
+	public function setCategory(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $category) {
 		$this->category = $category;
 	}
 
 	/**
 	 * Getter for category
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Jpfaq_Domain_Model_Category> category
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<Tx_Jpfaq_Domain_Model_Category> category
 	 */
 	public function getCategory() {
 		return $this->category;
@@ -159,4 +159,5 @@ class Tx_Jpfaq_Domain_Model_Question extends Tx_Extbase_DomainObject_AbstractEnt
 	}
 
 }
+
 ?>

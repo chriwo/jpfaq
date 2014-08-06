@@ -32,10 +32,13 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
  
-class Tx_Jpfaq_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
-    
-    protected $defaultOrderings = array(
-        'sorting' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+class Tx_Jpfaq_Domain_Repository_CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+
+	/**
+	 * @var array
+	 */
+	protected $defaultOrderings = array(
+        'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     );
 
      /**
@@ -45,9 +48,12 @@ class Tx_Jpfaq_Domain_Repository_CategoryRepository extends Tx_Extbase_Persisten
       */
      public function getCategoryNameForCategoryUid($categoryUID) {
          $category = $this->findByUid($categoryUID);
-         if ($category) {return $category->getCategory();}
+         if ($category) {
+			 return $category->getCategory();
+		 }
+
+		 return 0;
      }
-      
-    
 }
+
 ?>

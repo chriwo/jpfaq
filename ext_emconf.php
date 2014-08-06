@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Easy Frequently Asked Questions (FAQ) plugin. Optional features: categories, cool on-the-fly search and t3jQuery support.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '2.1.5',
+	'version' => '3.0.0',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
@@ -34,9 +34,9 @@ $EM_CONF[$_EXTKEY] = array(
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
-			'extbase' => '1.3-0.0.0',
-			'fluid' => '1.3-0.0.0',
-			'typo3' => '4.5.0-0.0.0',
+			'extbase' => '6.0.0-6.2.99',
+			'fluid' => '6.2.0-6.2.99',
+			'typo3' => '6.3.0-6.2.99',
 		),
 		'conflicts' => array(
 		),
